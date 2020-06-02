@@ -1,57 +1,75 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text } from 'react-native';
-import AppText from './AppText';
+import {
+    View,
+    StyleSheet,
+    Image,
+    Text,
+    ScrollView,
+    Dimensions
+} from 'react-native';
 
+import AppText from './AppText';
+var { height } = Dimensions.get('window');
 function MovieDetail({ ...rest }) {
     return (
         <View style={styles.mainContainer}>
-            <View style={styles.imageContainer}>
-                <Image
-                    source={require('../assets/lor3.jpg')}
-                    style={styles.image}
-                />
-            </View>
-            <View style={styles.secondaryContainer}>
-                <AppText style={styles.detailsLabel}>Movie Details</AppText>
-                <AppText style={styles.description}>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing Lorem Ipsum
-                    passages, and more recently with desktop publishing software
-                    like Aldus PageMaker including versions of Lorem Ipsum.
-                </AppText>
-            </View>
+            <ScrollView
+                style={styles.mainContainer}
+                showsVerticalScrollIndicator={false}
+            >
+                <View style={styles.imageContainer}>
+                    <Image
+                        style={styles.image}
+                        source={require('../assets/darkKnight.jpg')}
+                    />
+                </View>
+                <View style={styles.descriptionContainer}>
+                    <AppText style={styles.movieLabel}>Movie Details</AppText>
+                    <AppText>
+                        There are many variations of passages of Lorem Ipsum
+                        available, but the majority have suffered alteration in
+                        some form, by injected humour, or randomised words which
+                        don't look even slightly believable. If you are going to
+                        use a passage of Lorem Ipsum, you need to be sure there
+                        isn't anything embarrassing hidden in the middle of
+                        text. All the Lorem Ipsum generators on the Internet
+                        tend to repeat predefined chunks as necessary, making
+                        this the first true generator on the Internet. It uses a
+                        dictionary of over 200 Latin words, combined with a
+                        handful of model sentence structures, to generate Lorem
+                        Ipsum which looks reasonable. The generated Lorem Ipsum
+                        is therefore always free from repetition, injected
+                        humour, or non-characteristic words etc.
+                    </AppText>
+                </View>
+            </ScrollView>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    description: {
-        marginVertical: 30
+    size: {
+        height: height / 2
     },
-    detailsLabel: {
-        fontSize: 25
-    },
+    descriptionContainer: {},
     image: {
+        borderRadius: 10,
+        resizeMode: 'contain',
         width: '100%',
-        height: '100%',
-        borderRadius: 10
+        height: height / 3
     },
     imageContainer: {
-        marginVertical: 17,
-        flex: 1
+        paddingVertical: 10
     },
     mainContainer: {
-        flex: 2,
-        paddingHorizontal: 20
+        flex: 1,
+        flexDirection: 'column',
+        paddingHorizontal: 5
     },
-    secondaryContainer: {
-        flex: 1
+    movieLabel: {
+        paddingBottom: 10,
+        fontSize: 25,
+        fontWeight: '800'
     }
 });
 export default MovieDetail;

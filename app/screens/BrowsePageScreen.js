@@ -8,6 +8,7 @@ import Screen from '../components/Screen';
 import MovieDetail from '../components/MovieDetail';
 
 function BrowsePageScreen({ title = 'Title' }) {
+    const handlePressBack = () => {};
     return (
         <Screen>
             <Header
@@ -37,6 +38,9 @@ function BrowsePageScreen({ title = 'Title' }) {
 const styles = StyleSheet.create({
     navigator: {
         color: defaultStyles.colors.primary
+    },
+    scrollViewContainer: {
+        width: '100%'
     },
     titleStile: {
         fontSize: 30
