@@ -5,7 +5,7 @@ import AppText from './AppText';
 import defaultStyles from '../config/styles';
 import ListItemSeparator from './ListItemSeparator';
 
-function CategoryTitle({ title, style, ...rest }) {
+function CategoryTitle({ title, style }) {
     return (
         <View style={[styles.container, style]}>
             <AppText style={styles.title}>{title}</AppText>

@@ -24,7 +24,7 @@ function MovieList({ movies }) {
                         />
                     </View>
                 )}
-                keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id.toString()}
             />
         </View>
     );
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10
     },
     container: {
-        paddingBottom: 30
+        paddingBottom: 15
     },
     image: {
         height: height / 3.5,
