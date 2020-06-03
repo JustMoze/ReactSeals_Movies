@@ -4,13 +4,22 @@ import { StyleSheet } from 'react-native';
 import defaultStyles from '../config/styles';
 import Header from '../components/Header';
 import HeaderNavigator from './../components/HeaderNavigator';
-import Screen from '../components/Screen';
 import MovieDetail from '../components/MovieDetail';
+import movies from './../services/data';
 
-function BrowsePageScreen({ title = 'Title' }) {
+function BrowsePageScreen() {
     const handlePressBack = () => {};
+    const configureTitle = () => {
+        var slicedTitle = '';
+        if (movies[0].title.length > 20) {
+            slicedTitle = movies[0].title.slice(0, 17) + '...';
+        }
+        if (slicedTitle) {
+            return slicedTitle;
+        } else return movies[0].title;
+    };
     return (
-        <Screen>
+        <>
             <Header
                 NavigatorLeft={
                     <HeaderNavigator
@@ -27,11 +36,11 @@ function BrowsePageScreen({ title = 'Title' }) {
                     />
                 }
                 style={styles.titleStile}
-            >
-                {title}
-            </Header>
-            <MovieDetail />
-        </Screen>
+                title={configureTitle()}
+            />
+
+            <MovieDetail movie={movies[0]} numberOfLines={3} />
+        </>
     );
 }
 
@@ -43,7 +52,8 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     titleStile: {
-        fontSize: 30
+        fontFamily: 'sans-serif-condensed',
+        fontSize: 25
     }
 });
 export default BrowsePageScreen;

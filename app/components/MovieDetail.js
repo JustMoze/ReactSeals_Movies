@@ -1,60 +1,53 @@
 import React from 'react';
+import { YellowBox } from 'react-native';
 import {
-    View,
-    StyleSheet,
+    Dimensions,
     Image,
-    Text,
     ScrollView,
-    Dimensions
+    StyleSheet,
+    View,
+    SafeAreaView
 } from 'react-native';
 
 import AppText from './AppText';
+import CategoryTitle from './CategoryTitle';
+import OptionsList from './OptionsList';
+
+YellowBox.ignoreWarnings(['Remote debugger']);
 var { height } = Dimensions.get('window');
-function MovieDetail({ ...rest }) {
+
+function MovieDetail({ movie, ...rest }) {
     return (
-        <View style={styles.mainContainer}>
-            <ScrollView
-                style={styles.mainContainer}
-                showsVerticalScrollIndicator={false}
-            >
+        <ScrollView>
+            <View style={styles.mainContainer}>
                 <View style={styles.imageContainer}>
-                    <Image
-                        style={styles.image}
-                        source={require('../assets/darkKnight.jpg')}
-                    />
+                    <Image style={styles.image} source={movie.image} />
                 </View>
                 <View style={styles.descriptionContainer}>
                     <AppText style={styles.movieLabel}>Movie Details</AppText>
-                    <AppText>
-                        There are many variations of passages of Lorem Ipsum
-                        available, but the majority have suffered alteration in
-                        some form, by injected humour, or randomised words which
-                        don't look even slightly believable. If you are going to
-                        use a passage of Lorem Ipsum, you need to be sure there
-                        isn't anything embarrassing hidden in the middle of
-                        text. All the Lorem Ipsum generators on the Internet
-                        tend to repeat predefined chunks as necessary, making
-                        this the first true generator on the Internet. It uses a
-                        dictionary of over 200 Latin words, combined with a
-                        handful of model sentence structures, to generate Lorem
-                        Ipsum which looks reasonable. The generated Lorem Ipsum
-                        is therefore always free from repetition, injected
-                        humour, or non-characteristic words etc.
-                    </AppText>
+                    <AppText {...rest}>{movie.description}</AppText>
                 </View>
-            </ScrollView>
-        </View>
+                <SafeAreaView>
+                    <View style={styles.optionsContainer}>
+                        <OptionsList separatorAbove={true} />
+                    </View>
+                </SafeAreaView>
+                <CategoryTitle title="Related movies: " />
+                <AppText {...rest}>{movie.description}</AppText>
+                <AppText {...rest}>{movie.description}</AppText>
+            </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
-    size: {
-        height: height / 2
+    descriptionContainer: {
+        paddingBottom: 25,
+        paddingRight: 20
     },
-    descriptionContainer: {},
     image: {
-        borderRadius: 10,
-        resizeMode: 'contain',
+        borderRadius: 5,
+        resizeMode: 'stretch',
         width: '100%',
         height: height / 3
     },
@@ -64,12 +57,20 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         flexDirection: 'column',
-        paddingHorizontal: 5
+        paddingHorizontal: 10
     },
     movieLabel: {
-        paddingBottom: 10,
+        paddingTop: 5,
+        paddingBottom: 20,
         fontSize: 25,
         fontWeight: '800'
+    },
+    optionsContainer: {
+        paddingTop: 20,
+        width: '50%'
+    },
+    size: {
+        height: height / 2
     }
 });
 export default MovieDetail;

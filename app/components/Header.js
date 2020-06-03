@@ -4,14 +4,14 @@ import { View, StyleSheet, Text } from 'react-native';
 import AppText from './AppText';
 import defaultStyles from '../config/styles';
 
-function Header({ children, NavigatorLeft, NavigatorRight, style }) {
+function Header({ title, NavigatorLeft, NavigatorRight, style }) {
     return (
         <View style={styles.container}>
             {NavigatorLeft && (
                 <View style={styles.backContainer}>{NavigatorLeft}</View>
             )}
             <View style={styles.titleContainer}>
-                <AppText style={style}>{children}</AppText>
+                <AppText style={style}>{title}</AppText>
             </View>
             {NavigatorRight && (
                 <View style={styles.editContainer}>{NavigatorRight}</View>
@@ -22,8 +22,7 @@ function Header({ children, NavigatorLeft, NavigatorRight, style }) {
 
 const styles = StyleSheet.create({
     backContainer: {
-        padding: 5,
-        width: '33%'
+        padding: 5
     },
     container: {
         alignItems: 'center',
@@ -37,13 +36,12 @@ const styles = StyleSheet.create({
     editContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        padding: 5,
-        width: '33%'
+        padding: 5
     },
     titleContainer: {
+        flex: 1,
         alignItems: 'center',
-        padding: 5,
-        width: '33%'
+        padding: 5
     }
 });
 export default Header;
