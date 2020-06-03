@@ -5,10 +5,10 @@ import AppText from './AppText';
 import defaultStyles from '../config/styles';
 import ListItemSeparator from './ListItemSeparator';
 
-function CategoryTitle({ title }) {
+function CategoryTitle({ title, style, ...rest }) {
     return (
-        <View style={styles.container}>
-            <AppText>{title}</AppText>
+        <View style={[styles.container, style]}>
+            <AppText style={styles.title}>{title}</AppText>
             <ListItemSeparator style={styles.separator} />
         </View>
     );
@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     separator: {
         height: 1,
         backgroundColor: defaultStyles.colors.primary
+    },
+    title: {
+        color: defaultStyles.colors.primary,
+        fontWeight: 'bold'
     }
 });
 export default CategoryTitle;

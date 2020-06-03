@@ -28,7 +28,7 @@ function HomeScreen() {
                 </AppButton>
                 <AppButton
                     color={defaultStyles.colors.secondary}
-                    onPress={() => console.log('Browse Button was clicked')}
+                    onPress={() => console.log('Login Button was clicked')}
                     width="70%"
                 >
                     Login
