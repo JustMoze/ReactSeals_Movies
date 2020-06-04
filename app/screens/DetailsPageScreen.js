@@ -7,20 +7,12 @@ import Header from '../components/Header';
 import HeaderNavigator from '../components/HeaderNavigator';
 import MovieDetail from '../components/MovieDetail';
 import movies from '../services/data';
-import OptionsList from '../components/OptionsList';
 import MovieList from '../components/MovieList';
+import OptionsList from '../components/OptionsList';
 
 function DetailsPageScreen() {
     const handlePressBack = () => {};
-    const configureTitle = () => {
-        var slicedTitle = '';
-        if (movies[0].title.length > 20) {
-            slicedTitle = movies[0].title.slice(0, 17) + '...';
-        }
-        if (slicedTitle) {
-            return slicedTitle;
-        } else return movies[0].title;
-    };
+
     const renderMovieDetails = () => {
         return <MovieDetail movie={movies[0]} numberOfLines={3} />;
     };
@@ -52,8 +44,7 @@ function DetailsPageScreen() {
                         style={styles.navigator}
                     />
                 }
-                style={styles.titleStile}
-                title={configureTitle()}
+                title={movies[0].title}
             />
             <OptionsList
                 Header={renderMovieDetails}
@@ -73,10 +64,6 @@ const styles = StyleSheet.create({
     },
     scrollViewContainer: {
         width: '100%'
-    },
-    titleStile: {
-        fontFamily: 'sans-serif-condensed',
-        fontSize: 25
     }
 });
 export default DetailsPageScreen;
