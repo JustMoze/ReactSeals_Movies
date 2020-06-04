@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList } from 'react-native';
 
 import CategoryTitle from '../components/CategoryTitle';
 import data from '../services/data';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MovieList from '../components/MovieList';
 
@@ -17,30 +18,36 @@ const categories = [
 function BrowsePageScreen(props) {
     return (
         <View style={styles.container}>
-            <Header title="Home" style={styles.title} />
             <View style={styles.moviesContainer}>
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={categories}
-                    keyExtractor={(item) => item.name.toString()}
-                    renderItem={({ item, index }) => (
-                        <View key={index}>
-                            <CategoryTitle title={item.name} />
-                            <MovieList movies={data} />
-                        </View>
-                    )}
-                />
+                <Header title="Home" style={styles.title} />
+                <View style={styles.categoriesContainer}>
+                    <FlatList
+                        showsVerticalScrollIndicator={false}
+                        data={categories}
+                        keyExtractor={(item) => item.name.toString()}
+                        renderItem={({ item, index }) => (
+                            <View key={index}>
+                                <CategoryTitle title={item.name} />
+                                <MovieList movies={data} />
+                            </View>
+                        )}
+                    />
+                </View>
             </View>
+            <Footer />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    categoriesContainer: {
+        paddingHorizontal: 10
+    },
     container: {
-        paddingBottom: 50
+        flex: 1
     },
     moviesContainer: {
-        paddingHorizontal: 10
+        paddingBottom: 50
     },
     title: {
         fontSize: 25

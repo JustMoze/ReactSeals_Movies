@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
         backgroundColor: defaultStyles.colors.primary
     },
     title: {
-        color: defaultStyles.colors.primary,
+        color: defaultStyles.colors.secondary,
         fontWeight: 'bold'
     }
 });
