@@ -16,7 +16,13 @@ const data = [
     }
 ];
 
-function OptionsList({ Header, Footer, onPress, separatorAbove }) {
+function OptionsList({
+    Header,
+    Footer,
+    onPressAdd,
+    onPressPlay,
+    separatorAbove
+}) {
     function renderSeparator() {
         return <ListItemSeparator style={styles.separator} />;
     }
@@ -35,7 +41,11 @@ function OptionsList({ Header, Footer, onPress, separatorAbove }) {
                         <View style={styles.itemsContainer}>
                             <OptionField
                                 title={item.title}
-                                onPress={onPress}
+                                onPress={
+                                    item.title === 'Play movie'
+                                        ? onPressPlay
+                                        : onPressAdd
+                                }
                                 textStyle={styles.optionsTitle}
                                 containerStyle={styles.optionsContainer}
                             />

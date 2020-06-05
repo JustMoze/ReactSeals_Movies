@@ -6,7 +6,7 @@ import AppText from '../components/AppText';
 import defaultStyles from '../config/styles';
 import Screen from '../components/Screen';
 
-function HomeScreen() {
+function HomeScreen({ navigation }) {
     return (
         <Screen style={styles.container}>
             <View style={styles.imageContainer}>
@@ -21,7 +21,7 @@ function HomeScreen() {
             <View style={styles.buttonsContainer}>
                 <AppButton
                     color={defaultStyles.colors.secondary}
-                    onPress={() => console.log('Browse Button was clicked')}
+                    onPress={() => navigation.push('Browse')}
                     width="70%"
                 >
                     Browse

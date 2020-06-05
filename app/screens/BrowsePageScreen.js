@@ -6,6 +6,7 @@ import data from '../services/data';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import MovieList from '../components/MovieList';
+import Screen from '../components/Screen';
 
 const categories = [
     { name: 'Action' },
@@ -15,27 +16,37 @@ const categories = [
     { name: 'Fantasy' }
 ];
 
-function BrowsePageScreen(props) {
+function BrowsePageScreen({ navigation }) {
+    function handlePressMovie(movie) {
+        navigation.navigate('Details', {
+            movie: movie
+        });
+    }
     return (
-        <View style={styles.container}>
-            <View style={styles.moviesContainer}>
-                <Header title="Home" style={styles.title} />
-                <View style={styles.categoriesContainer}>
-                    <FlatList
-                        showsVerticalScrollIndicator={false}
-                        data={categories}
-                        keyExtractor={(item) => item.name.toString()}
-                        renderItem={({ item, index }) => (
-                            <View key={index}>
-                                <CategoryTitle title={item.name} />
-                                <MovieList movies={data} />
-                            </View>
-                        )}
-                    />
+        <Screen>
+            <View style={styles.container}>
+                <View style={styles.moviesContainer}>
+                    <Header title="Home" style={styles.title} />
+                    <View style={styles.categoriesContainer}>
+                        <FlatList
+                            showsVerticalScrollIndicator={false}
+                            data={categories}
+                            keyExtractor={(item) => item.name.toString()}
+                            renderItem={({ item, index }) => (
+                                <View key={index}>
+                                    <CategoryTitle title={item.name} />
+                                    <MovieList
+                                        movies={data}
+                                        onPress={handlePressMovie}
+                                    />
+                                </View>
+                            )}
+                        />
+                    </View>
                 </View>
+                <Footer />
             </View>
-            <Footer />
-        </View>
+        </Screen>
     );
 }
 

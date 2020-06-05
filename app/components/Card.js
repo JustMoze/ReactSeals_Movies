@@ -6,7 +6,7 @@ import defaultStyles from './../config/styles';
 
 function Card({ imageStyle, movie, onPress, ...rest }) {
     return (
-        <TouchableOpacity onPress={() => onPress(movie.title)}>
+        <TouchableOpacity onPress={() => onPress(movie)}>
             <View style={styles.container}>
                 <Image source={movie.image} style={imageStyle} />
                 <View style={styles.movieTitle}>

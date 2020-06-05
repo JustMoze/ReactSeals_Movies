@@ -4,10 +4,7 @@ import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import Card from './Card';
 var { height, width } = Dimensions.get('window');
 
-function MovieList({ movies }) {
-    const handleCardPress = (title) => {
-        console.log(title, 'movie was clicked');
-    };
+function MovieList({ movies, onPress, navigation }) {
     return (
         <View style={styles.container}>
             <FlatList
@@ -17,7 +14,7 @@ function MovieList({ movies }) {
                 renderItem={({ item }) => (
                     <View style={styles.cardContainer}>
                         <Card
-                            onPress={handleCardPress}
+                            onPress={onPress}
                             movie={item}
                             imageStyle={styles.image}
                             numberOfLines={1}

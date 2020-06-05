@@ -10,11 +10,10 @@ import movies from '../services/data';
 import MovieList from '../components/MovieList';
 import OptionsList from '../components/OptionsList';
 
-function DetailsPageScreen() {
-    const handlePressBack = () => {};
-
+function DetailsPageScreen({ route, navigation }) {
+    const { movie } = route.params;
     const renderMovieDetails = () => {
-        return <MovieDetail movie={movies[0]} numberOfLines={3} />;
+        return <MovieDetail movie={movie} numberOfLines={3} />;
     };
     const renderFooter = () => {
         return (
@@ -32,6 +31,7 @@ function DetailsPageScreen() {
             <Header
                 NavigatorLeft={
                     <HeaderNavigator
+                        onPress={() => navigation.goBack()}
                         actionName="Back"
                         color={defaultStyles.colors.primary}
                         name="chevron-left"
@@ -44,9 +44,15 @@ function DetailsPageScreen() {
                         style={styles.navigator}
                     />
                 }
-                title={movies[0].title}
+                title={movie.title}
             />
             <OptionsList
+                onPressPlay={() => {
+                    /* 1. Navigate to the Details route with params */
+                    navigation.navigate('Player', {
+                        movie: movie
+                    });
+                }}
                 Header={renderMovieDetails}
                 Footer={renderFooter}
                 separatorAbove={true}

@@ -19,7 +19,13 @@ function Header({ title, NavigatorLeft, NavigatorRight, style }) {
             {NavigatorLeft && (
                 <View style={styles.backContainer}>{NavigatorLeft}</View>
             )}
-            <View style={styles.titleContainer}>
+            <View
+                style={
+                    NavigatorLeft
+                        ? styles.titleContainer
+                        : [styles.titleContainer, styles.title]
+                }
+            >
                 <AppText style={styles.titleStile}>{configureTitle()}</AppText>
             </View>
             {NavigatorRight && (
@@ -48,9 +54,15 @@ const styles = StyleSheet.create({
         padding: 5
     },
     titleContainer: {
+        alignItems: 'flex-start',
         flex: 1,
-        alignItems: 'center',
-        padding: 5
+        paddingVertical: 5,
+        paddingRight: 10,
+        paddingLeft: 20
+    },
+    title: {
+        width: '100%',
+        alignItems: 'center'
     },
     titleStile: {
         fontFamily: 'sans-serif-condensed',
