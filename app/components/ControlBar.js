@@ -8,15 +8,14 @@ import ProgressBar from './ProgressBar';
 const controlBarSize = height / 14;
 
 function ControlBar({
-    endTime = '00:00',
-
-    fullScrean,
+    endTime,
     onBack,
     onChangeScreen,
     onPlay,
+    onPause,
     onSkip,
     play,
-    startTime = '00:00',
+    startTime,
     width = 40
 }) {
     return (
@@ -25,12 +24,15 @@ function ControlBar({
                 <TouchableOpacity onPress={onBack} style={styles.option}>
                     <Icon name="rotate-left" size={controlBarSize * 0.8} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={onPlay} style={styles.option}>
+                <TouchableOpacity
+                    onPress={play ? onPause : onPlay}
+                    style={styles.option}
+                >
                     <Icon
                         name={
                             play
-                                ? 'play-circle-outline'
-                                : 'pause-circle-outline'
+                                ? 'pause-circle-outline'
+                                : 'play-circle-outline'
                         }
                         size={controlBarSize * 0.8}
                     />
@@ -51,10 +53,7 @@ function ControlBar({
                     onPress={onChangeScreen}
                     style={styles.option}
                 >
-                    <Icon
-                        name={fullScrean ? 'fullscreen' : 'fullscreen-exit'}
-                        size={controlBarSize * 0.8}
-                    />
+                    <Icon name="fullscreen" size={controlBarSize * 0.8} />
                 </TouchableOpacity>
             </View>
         </View>
