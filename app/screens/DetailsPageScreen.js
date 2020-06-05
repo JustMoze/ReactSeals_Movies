@@ -15,6 +15,11 @@ function DetailsPageScreen({ route, navigation }) {
     const renderMovieDetails = () => {
         return <MovieDetail movie={movie} numberOfLines={3} />;
     };
+    function handlePressMovie(movie) {
+        navigation.navigate('Details', {
+            movie: movie
+        });
+    }
     const renderFooter = () => {
         return (
             <>
@@ -22,7 +27,7 @@ function DetailsPageScreen({ route, navigation }) {
                     title="Related movies: "
                     style={styles.footerTitle}
                 />
-                <MovieList movies={movies} />
+                <MovieList movies={movies} onPress={handlePressMovie} />
             </>
         );
     };
