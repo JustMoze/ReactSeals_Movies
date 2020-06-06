@@ -4,7 +4,7 @@ import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 import Card from './Card';
 var { height, width } = Dimensions.get('window');
 
-function MovieList({ movies, onPress, navigation }) {
+function MovieList({ movies, onPress }) {
     return (
         <View style={styles.container}>
             <FlatList

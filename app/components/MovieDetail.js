@@ -1,10 +1,8 @@
 import React from 'react';
-import { YellowBox } from 'react-native';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
 
 import AppText from './AppText';
 
-YellowBox.ignoreWarnings(['Remote debugger']);
 var { height } = Dimensions.get('window');
 
 function MovieDetail({ movie, ...rest }) {

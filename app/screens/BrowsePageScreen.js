@@ -1,22 +1,23 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
-import CategoryTitle from '../components/CategoryTitle';
-import data from '../services/data';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import MovieList from '../components/MovieList';
 import Screen from '../components/Screen';
+import Spinner from '../components/Spinner';
+import { height } from '../config/phoneDetails';
+import BrowserPageComponent from '../components/BrowserPageComponent';
 
 const categories = [
-    { name: 'Action' },
-    { name: 'Comedy' },
-    { name: 'Romantic' },
-    { name: 'Horror' },
-    { name: 'Fantasy' }
+    { name: 'Latest', property: 'latest', id: 0 },
+    { name: 'Now Playing', property: 'now_playing', id: 1 },
+    { name: 'Top Rated', property: 'top_rated', id: 2 },
+    { name: 'Popular', property: 'popular', id: 3 },
+    { name: 'Upcoming', property: 'upcoming', id: 4 }
 ];
 
 function BrowsePageScreen({ navigation }) {
+    const isLoading = useRef(true);
     function handlePressMovie(movie) {
         navigation.navigate('Details', {
             movie: movie
@@ -24,6 +25,9 @@ function BrowsePageScreen({ navigation }) {
     }
     return (
         <Screen>
+            {/* {isLoading.current ? (
+                <Spinner />
+            ) : ( */}
             <View style={styles.container}>
                 <View style={styles.moviesContainer}>
                     <Header title="Home" style={styles.title} />
@@ -34,10 +38,10 @@ function BrowsePageScreen({ navigation }) {
                             keyExtractor={(item) => item.name.toString()}
                             renderItem={({ item, index }) => (
                                 <View key={index}>
-                                    <CategoryTitle title={item.name} />
-                                    <MovieList
-                                        movies={data}
+                                    <BrowserPageComponent
+                                        category={item.property}
                                         onPress={handlePressMovie}
+                                        title={item.name}
                                     />
                                 </View>
                             )}
@@ -46,13 +50,15 @@ function BrowsePageScreen({ navigation }) {
                 </View>
                 <Footer />
             </View>
+            {/* )} */}
         </Screen>
     );
 }
 
 const styles = StyleSheet.create({
     categoriesContainer: {
-        paddingHorizontal: 10
+        paddingHorizontal: 10,
+        paddingBottom: height * 0.25
     },
     container: {
         flex: 1
