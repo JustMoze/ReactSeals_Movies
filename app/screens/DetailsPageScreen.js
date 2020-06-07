@@ -1,14 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import CategoryTitle from '../components/CategoryTitle';
 import defaultStyles from '../config/styles';
 import Header from '../components/Header';
 import HeaderNavigator from '../components/HeaderNavigator';
 import MovieDetail from '../components/MovieDetail';
-import movies from '../services/data';
-import MovieList from '../components/MovieList';
 import OptionsList from '../components/OptionsList';
+import BrowserPageComponent from '../components/BrowserPageComponent';
 
 function DetailsPageScreen({ route, navigation }) {
     const { movie } = route.params;
@@ -23,11 +21,13 @@ function DetailsPageScreen({ route, navigation }) {
     const renderFooter = () => {
         return (
             <>
-                <CategoryTitle
-                    title="Related movies: "
+                <BrowserPageComponent
+                    realted={true}
+                    movieId={movie.id}
+                    onPress={handlePressMovie}
+                    title="Related Movies"
                     style={styles.footerTitle}
                 />
-                <MovieList movies={movies} onPress={handlePressMovie} />
             </>
         );
     };
@@ -53,7 +53,6 @@ function DetailsPageScreen({ route, navigation }) {
             />
             <OptionsList
                 onPressPlay={() => {
-                    /* 1. Navigate to the Details route with params */
                     navigation.navigate('Player', {
                         movie: movie
                     });

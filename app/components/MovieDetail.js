@@ -9,7 +9,14 @@ function MovieDetail({ movie, ...rest }) {
     return (
         <View style={styles.mainContainer}>
             <View style={styles.imageContainer}>
-                <Image style={styles.image} source={movie.image} />
+                <Image
+                    style={styles.image}
+                    source={
+                        isNaN(movie.image)
+                            ? { uri: movie.image }
+                            : require('../assets/movie.jpg')
+                    }
+                />
             </View>
             <View style={styles.descriptionContainer}>
                 <AppText style={styles.movieLabel}>Movie Details</AppText>

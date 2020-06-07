@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
 import Footer from '../components/Footer';
@@ -17,7 +17,15 @@ const categories = [
 ];
 
 function BrowsePageScreen({ navigation }) {
-    const isLoading = useRef(true);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        function loadMovies() {
+            setTimeout(function () {
+                setIsLoading(false);
+            }, 2000);
+        }
+        loadMovies();
+    }, [isLoading]);
     function handlePressMovie(movie) {
         navigation.navigate('Details', {
             movie: movie
@@ -25,32 +33,32 @@ function BrowsePageScreen({ navigation }) {
     }
     return (
         <Screen>
-            {/* {isLoading.current ? (
+            {isLoading ? (
                 <Spinner />
-            ) : ( */}
-            <View style={styles.container}>
-                <View style={styles.moviesContainer}>
-                    <Header title="Home" style={styles.title} />
-                    <View style={styles.categoriesContainer}>
-                        <FlatList
-                            showsVerticalScrollIndicator={false}
-                            data={categories}
-                            keyExtractor={(item) => item.name.toString()}
-                            renderItem={({ item, index }) => (
-                                <View key={index}>
-                                    <BrowserPageComponent
-                                        category={item.property}
-                                        onPress={handlePressMovie}
-                                        title={item.name}
-                                    />
-                                </View>
-                            )}
-                        />
+            ) : (
+                <View style={styles.container}>
+                    <View style={styles.moviesContainer}>
+                        <Header title="Home" style={styles.title} />
+                        <View style={styles.categoriesContainer}>
+                            <FlatList
+                                showsVerticalScrollIndicator={false}
+                                data={categories}
+                                keyExtractor={(item) => item.name.toString()}
+                                renderItem={({ item, index }) => (
+                                    <View key={index}>
+                                        <BrowserPageComponent
+                                            category={item.property}
+                                            onPress={handlePressMovie}
+                                            title={item.name}
+                                        />
+                                    </View>
+                                )}
+                            />
+                        </View>
                     </View>
+                    <Footer />
                 </View>
-                <Footer />
-            </View>
-            {/* )} */}
+            )}
         </Screen>
     );
 }

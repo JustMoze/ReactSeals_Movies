@@ -6,3 +6,9 @@ export function getMovies(category) {
         MOVIES_API_URL + `${category}?api_key=${API_KEY}&language=en-US&page=1`
     );
 }
+export function similarMovies(movieId) {
+    return http.get(
+        MOVIES_API_URL +
+            `${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`
+    );
+}

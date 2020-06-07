@@ -1,15 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import AppText from './AppText';
-import data from '../services/data';
 import defaultStyles from './../config/styles';
 
 function Card({ imageStyle, movie, onPress, ...rest }) {
     return (
         <TouchableOpacity onPress={() => onPress(movie)}>
             <View style={styles.container}>
-                <Image source={data[0].image} style={imageStyle} />
+                <Image
+                    source={
+                        isNaN(movie.image) && movie.image !== null
+                            ? { uri: movie.image }
+                            : require('../assets/movie.jpg')
+                    }
+                    style={imageStyle}
+                />
                 <View style={styles.movieTitle}>
                     <AppText style={styles.imageTitle} {...rest}>
                         {movie.title}

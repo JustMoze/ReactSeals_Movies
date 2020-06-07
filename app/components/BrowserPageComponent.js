@@ -1,18 +1,31 @@
 import React, { useEffect, useState } from 'react';
 
 import CategoryTitle from './CategoryTitle';
-import data from '../services/data';
 import MovieList from './MovieList';
-import { getMovies } from './../services/movieService';
+import { getMovies, similarMovies } from './../services/movieService';
+import { IMAGES_PATH } from 'react-native-dotenv';
 
-function BrowserPageComponent({ category, onPress, title }) {
+function BrowserPageComponent({
+    category,
+    movieId = null,
+    realted = false,
+    onPress,
+    style,
+    title
+}) {
     const [collectedMovies, setCollectedMovies] = useState([]);
     useEffect(() => {
         async function getSpecificMovies() {
             try {
-                const { data: movies } = await getMovies(category);
-                const deconstructedMovies = deconstructTheMovies(movies);
-                setCollectedMovies(deconstructedMovies);
+                if (!realted) {
+                    const { data: movies } = await getMovies(category);
+                    const deconstructedMovies = deconstructTheMovies(movies);
+                    setCollectedMovies(deconstructedMovies);
+                } else {
+                    const { data: movies } = await similarMovies(movieId);
+                    const deconstructedMovies = deconstructTheMovies(movies);
+                    setCollectedMovies(deconstructedMovies);
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -28,7 +41,7 @@ function BrowserPageComponent({ category, onPress, title }) {
                     id: id,
                     title: title,
                     description: overview,
-                    image: poster_path
+                    image: `${IMAGES_PATH}${poster_path}`
                 };
                 movieArr.push(object);
             });
@@ -46,7 +59,7 @@ function BrowserPageComponent({ category, onPress, title }) {
     }
     return (
         <>
-            <CategoryTitle title={title} />
+            <CategoryTitle title={title} style={style} />
             <MovieList movies={collectedMovies} onPress={onPress} />
         </>
     );
