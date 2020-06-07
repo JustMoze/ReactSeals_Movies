@@ -18,18 +18,18 @@ function AppButton({ children, color, onPress, width = '100%', ...rest }) {
 
 const styles = StyleSheet.create({
     button: {
-        width: '100%',
         alignItems: 'center',
+        borderRadius: 40,
         height: 50,
         justifyContent: 'center',
-        borderRadius: 40,
-        marginVertical: 10
+        marginVertical: 10,
+        width: '100%'
     },
     buttonText: {
-        fontSize: 20,
         color: defaultStyles.colors.white,
-        textTransform: 'uppercase',
-        fontWeight: 'bold'
+        fontSize: 20,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
     }
 });
 

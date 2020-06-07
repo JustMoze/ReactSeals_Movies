@@ -33,9 +33,9 @@ const styles = StyleSheet.create({
     },
     image: {
         borderRadius: 5,
+        height: height / 3,
         resizeMode: 'stretch',
-        width: '100%',
-        height: height / 3
+        width: '100%'
     },
     imageContainer: {
         paddingVertical: 10
@@ -46,10 +46,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10
     },
     movieLabel: {
-        paddingTop: 5,
-        paddingBottom: 20,
         fontSize: 25,
-        fontWeight: '800'
+        fontWeight: '800',
+        paddingBottom: 20,
+        paddingTop: 5
     },
     optionsContainer: {
         paddingTop: 20,

@@ -52,18 +52,18 @@ function Footer({ onPress }) {
 
 const styles = StyleSheet.create({
     container: {
-        position: 'absolute',
         backgroundColor: defaultStyle.colors.primary,
-        width: '100%',
         bottom: 0,
-        height: 80
+        height: 80,
+        position: 'absolute',
+        width: '100%'
     },
     iconContainer: {
-        borderRadius: 25,
+        alignItems: 'center',
         backgroundColor: defaultStyle.colors.white,
-        padding: 7,
+        borderRadius: 25,
         justifyContent: 'center',
-        alignItems: 'center'
+        padding: 7
     },
     iconLabel: {
         fontSize: 10,
@@ -71,9 +71,9 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     optionsContainer: {
+        alignItems: 'center',
         paddingHorizontal: 30,
         paddingTop: 5,
-        alignItems: 'center',
         width: '33%'
     }
 });

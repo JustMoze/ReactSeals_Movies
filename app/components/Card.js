@@ -29,15 +29,15 @@ function Card({ imageStyle, movie, onPress, ...rest }) {
 const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
-        overflow: 'hidden',
         flexDirection: 'column',
+        overflow: 'hidden',
         width: '100%'
     },
     imageTitle: {
-        flex: 1,
-        flexWrap: 'wrap',
-        flexShrink: 1,
         color: defaultStyles.colors.dark,
+        flex: 1,
+        flexShrink: 1,
+        flexWrap: 'wrap',
         fontSize: 15
     },
     movieTitle: {

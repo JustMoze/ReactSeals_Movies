@@ -39,9 +39,9 @@ function BrowserPageComponent({
                 const { id, title, overview, poster_path } = movie;
                 var object = {
                     id: id,
-                    title: title,
                     description: overview,
-                    image: `${IMAGES_PATH}${poster_path}`
+                    image: `${IMAGES_PATH}${poster_path}`,
+                    title: title
                 };
                 movieArr.push(object);
             });
@@ -49,9 +49,9 @@ function BrowserPageComponent({
             const { id, title, overview, poster_path } = movies;
             var object = {
                 id: id,
-                title: title,
                 description: overview,
-                image: poster_path
+                image: poster_path,
+                title: title
             };
             movieArr.push(object);
         }

@@ -2,15 +2,15 @@ import React from 'react';
 import { Dimensions, FlatList, StyleSheet, View } from 'react-native';
 
 import Card from './Card';
-var { height, width } = Dimensions.get('window');
+import { height, width } from '../config/phoneDetails';
 
 function MovieList({ movies, onPress }) {
     return (
         <View style={styles.container}>
             <FlatList
+                data={movies}
                 horizontal
                 showsHorizontalScrollIndicator={false}
-                data={movies}
                 renderItem={({ item }) => (
                     <View style={styles.cardContainer}>
                         <Card

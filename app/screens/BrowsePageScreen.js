@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 
+import BrowserPageComponent from '../components/BrowserPageComponent';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Screen from '../components/Screen';
 import Spinner from '../components/Spinner';
 import { height } from '../config/phoneDetails';
-import BrowserPageComponent from '../components/BrowserPageComponent';
 
 const categories = [
     { name: 'Latest', property: 'latest', id: 0 },
@@ -41,7 +41,6 @@ function BrowsePageScreen({ navigation }) {
                         <Header title="Home" style={styles.title} />
                         <View style={styles.categoriesContainer}>
                             <FlatList
-                                showsVerticalScrollIndicator={false}
                                 data={categories}
                                 keyExtractor={(item) => item.name.toString()}
                                 renderItem={({ item, index }) => (
@@ -53,6 +52,7 @@ function BrowsePageScreen({ navigation }) {
                                         />
                                     </View>
                                 )}
+                                showsVerticalScrollIndicator={false}
                             />
                         </View>
                     </View>

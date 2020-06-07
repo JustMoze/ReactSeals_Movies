@@ -32,16 +32,16 @@ function ProgressBar({ absluteFill, endTime, progressBar, startTime, width }) {
 
 const styles = StyleSheet.create({
     endTime: {
-        width: '50%',
-        alignItems: 'flex-end'
+        alignItems: 'flex-end',
+        width: '50%'
     },
     info: {
         flexDirection: 'row'
     },
 
     startTime: {
-        width: '50%',
-        alignItems: 'baseline'
+        alignItems: 'baseline',
+        width: '50%'
     },
     text: {
         color: defaultStyle.colors.primary,

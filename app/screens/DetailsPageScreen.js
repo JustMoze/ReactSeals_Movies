@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
+import BrowserPageComponent from '../components/BrowserPageComponent';
 import defaultStyles from '../config/styles';
 import Header from '../components/Header';
 import HeaderNavigator from '../components/HeaderNavigator';
 import MovieDetail from '../components/MovieDetail';
 import OptionsList from '../components/OptionsList';
-import BrowserPageComponent from '../components/BrowserPageComponent';
 
 function DetailsPageScreen({ route, navigation }) {
     const { movie } = route.params;
@@ -20,15 +20,13 @@ function DetailsPageScreen({ route, navigation }) {
     }
     const renderFooter = () => {
         return (
-            <>
-                <BrowserPageComponent
-                    realted={true}
-                    movieId={movie.id}
-                    onPress={handlePressMovie}
-                    title="Related Movies"
-                    style={styles.footerTitle}
-                />
-            </>
+            <BrowserPageComponent
+                movieId={movie.id}
+                onPress={handlePressMovie}
+                realted={true}
+                style={styles.footerTitle}
+                title="Related Movies"
+            />
         );
     };
     return (
@@ -36,10 +34,10 @@ function DetailsPageScreen({ route, navigation }) {
             <Header
                 NavigatorLeft={
                     <HeaderNavigator
-                        onPress={() => navigation.goBack()}
                         actionName="Back"
                         color={defaultStyles.colors.primary}
                         name="chevron-left"
+                        onPress={() => navigation.goBack()}
                         style={styles.navigator}
                     />
                 }
@@ -52,13 +50,13 @@ function DetailsPageScreen({ route, navigation }) {
                 title={movie.title}
             />
             <OptionsList
+                Footer={renderFooter}
+                Header={renderMovieDetails}
                 onPressPlay={() => {
                     navigation.navigate('Player', {
                         movie: movie
                     });
                 }}
-                Header={renderMovieDetails}
-                Footer={renderFooter}
                 separatorAbove={true}
             />
         </>

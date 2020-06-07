@@ -11,16 +11,16 @@ function PlayerPageScreen({ route, navigation }) {
     return (
         <>
             <Header
-                title={movie.title}
                 style={styles.title}
                 NavigatorLeft={
                     <HeaderNavigator
-                        onPress={() => navigation.goBack()}
                         actionName="Back"
                         color={defaultStyles.colors.primary}
                         name="chevron-left"
+                        onPress={() => navigation.goBack()}
                     />
                 }
+                title={movie.title}
             />
             <View style={styles.container}>
                 <VideoPlayer uri="http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4" />

@@ -16,12 +16,12 @@ function CategoryTitle({ title, style }) {
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        paddingVertical: 15
+        paddingVertical: 15,
+        width: '100%'
     },
     separator: {
-        height: 1,
-        backgroundColor: defaultStyles.colors.primary
+        backgroundColor: defaultStyles.colors.primary,
+        height: 1
     },
     title: {
         color: defaultStyles.colors.secondary,

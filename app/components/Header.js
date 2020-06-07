@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
     title: {
-        width: '100%',
-        alignItems: 'center'
+        alignItems: 'center',
+        width: '100%'
     },
     titleStile: {
         fontFamily: 'sans-serif-condensed',

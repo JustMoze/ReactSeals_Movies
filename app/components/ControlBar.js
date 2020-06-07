@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 
-import { height } from '../config/phoneDetails';
 import Icon from './Icon';
 import ProgressBar from './ProgressBar';
+import { height } from '../config/phoneDetails';
 
 const controlBarSize = height / 14;
 
@@ -42,10 +42,10 @@ function ControlBar({
                 </TouchableOpacity>
                 <View style={styles.progressBarContainer}>
                     <ProgressBar
-                        endTime={endTime}
-                        startTime={startTime}
                         absluteFill={styles.absluteFill}
+                        endTime={endTime}
                         progressBar={styles.progressBar}
+                        startTime={startTime}
                         width={width + '%'}
                     />
                 </View>

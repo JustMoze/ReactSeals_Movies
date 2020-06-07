@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import AppText from './AppText';
 import Icon from './Icon';
@@ -15,8 +15,8 @@ function HeaderNavigator({ actionName, name, onPress, ...rest }) {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        flexDirection: 'row'
     }
 });
 export default HeaderNavigator;
