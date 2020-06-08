@@ -11,7 +11,6 @@ function PlayerPageScreen({ route, navigation }) {
     return (
         <>
             <Header
-                style={styles.title}
                 NavigatorLeft={
                     <HeaderNavigator
                         actionName="Back"

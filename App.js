@@ -6,6 +6,7 @@ import PlayerPageScreen from './app/screens/PlayerPageScreen';
 import HomeScreen from './app/screens/HomeScreen';
 import BrowsePageScreen from './app/screens/BrowsePageScreen';
 import DetailsPageScreen from './app/screens/DetailsPageScreen';
+import LoginPageScreen from './app/screens/LoginPageScreen';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ export default function App() {
                 <Stack.Screen name="Browse" component={BrowsePageScreen} />
                 <Stack.Screen name="Details" component={DetailsPageScreen} />
                 <Stack.Screen name="Player" component={PlayerPageScreen} />
+                <Stack.Screen name="Login" component={LoginPageScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

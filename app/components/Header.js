@@ -3,12 +3,13 @@ import { View, StyleSheet } from 'react-native';
 
 import AppText from './AppText';
 import defaultStyles from '../config/styles';
+import { width } from '../config/phoneDetails';
 
-function Header({ title, NavigatorLeft, NavigatorRight, style }) {
+function Header({ title, NavigatorLeft, NavigatorRight }) {
     const configureTitle = () => {
         var slicedTitle = '';
-        if (title.length > 20) {
-            slicedTitle = title.slice(0, 17) + '...';
+        if (title.length > 9) {
+            slicedTitle = title.slice(0, 9) + '...';
         }
         if (slicedTitle) {
             return slicedTitle;
@@ -16,28 +17,29 @@ function Header({ title, NavigatorLeft, NavigatorRight, style }) {
     };
     return (
         <View style={styles.container}>
-            {NavigatorLeft && (
-                <View style={styles.backContainer}>{NavigatorLeft}</View>
-            )}
-            <View
-                style={
-                    NavigatorLeft
-                        ? styles.titleContainer
-                        : [styles.titleContainer, styles.title]
-                }
-            >
-                <AppText style={styles.titleStile}>{configureTitle()}</AppText>
+            <View style={styles.itemsContainer}>
+                <View style={styles.backContainer}>
+                    {NavigatorLeft ? NavigatorLeft : null}
+                </View>
+                <View style={styles.titleContainer}>
+                    <AppText style={styles.titleStile}>
+                        {configureTitle()}
+                    </AppText>
+                </View>
+                <View style={styles.editContainer}>
+                    {NavigatorRight ? NavigatorRight : null}
+                </View>
             </View>
-            {NavigatorRight && (
-                <View style={styles.editContainer}>{NavigatorRight}</View>
-            )}
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     backContainer: {
-        padding: 5
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        padding: 5,
+        width: width / 3
     },
     container: {
         alignItems: 'center',
@@ -51,7 +53,13 @@ const styles = StyleSheet.create({
     editContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        padding: 5
+        padding: 5,
+        width: width / 4
+    },
+    itemsContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        paddingTop: 15
     },
     titleContainer: {
         alignItems: 'flex-start',
@@ -59,10 +67,6 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         paddingRight: 10,
         paddingLeft: 20
-    },
-    title: {
-        alignItems: 'center',
-        width: '100%'
     },
     titleStile: {
         fontFamily: 'sans-serif-condensed',
