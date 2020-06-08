@@ -9,11 +9,11 @@ import Spinner from '../components/Spinner';
 import { height } from '../config/phoneDetails';
 
 const categories = [
-    { name: 'Latest', property: 'latest', id: 0 },
-    { name: 'Now Playing', property: 'now_playing', id: 1 },
-    { name: 'Top Rated', property: 'top_rated', id: 2 },
-    { name: 'Popular', property: 'popular', id: 3 },
-    { name: 'Upcoming', property: 'upcoming', id: 4 }
+    { name: 'Popular', property: 'popular' },
+    { name: 'Now Playing', property: 'now_playing' },
+    { name: 'Top Rated', property: 'top_rated' },
+    { name: 'Upcoming', property: 'upcoming' },
+    { name: 'Latest', property: 'latest' }
 ];
 
 function BrowsePageScreen({ navigation }) {
