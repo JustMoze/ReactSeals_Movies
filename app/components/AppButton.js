@@ -3,10 +3,20 @@ import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 
 import defaultStyles from '../config/styles';
 
-function AppButton({ children, color, onPress, width = '100%', ...rest }) {
+function AppButton({
+    children,
+    color = 'secondary',
+    onPress,
+    width = '100%',
+    ...rest
+}) {
     return (
         <TouchableOpacity
-            style={[styles.button, { backgroundColor: color }, { width }]}
+            style={[
+                styles.button,
+                { backgroundColor: defaultStyles.colors[color] },
+                { width }
+            ]}
             onPress={onPress}
         >
             <Text style={styles.buttonText} {...rest}>

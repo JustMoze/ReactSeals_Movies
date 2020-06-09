@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, ToastAndroid } from 'react-native';
+import Modal from 'react-native-modal';
+import * as SecureStore from 'expo-secure-store';
 
 import BrowserPageComponent from '../components/BrowserPageComponent';
 import Footer from '../components/Footer';
@@ -7,6 +9,11 @@ import Header from '../components/Header';
 import Screen from '../components/Screen';
 import Spinner from '../components/Spinner';
 import { height } from '../config/phoneDetails';
+import UserRow from '../components/UserRow';
+import AppButton from './../components/AppButton';
+import defaultStyles from './../config/styles';
+
+console.ignoredYellowBox = ['Setting a timer'];
 
 const categories = [
     { name: 'Popular', property: 'popular' },
@@ -17,19 +24,62 @@ const categories = [
 ];
 
 function BrowsePageScreen({ navigation }) {
+    const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [userRequest, setUserRequest] = useState({
+        email: '',
+        username: ''
+    });
     useEffect(() => {
+        async function retrieveData() {
+            try {
+                const email_address = await SecureStore.getItemAsync('email');
+                const username = await SecureStore.getItemAsync('username');
+                if (email_address !== null && username !== null) {
+                    setUserRequest({
+                        email: email_address,
+                        username: username
+                    });
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        retrieveData();
         function loadMovies() {
-            setTimeout(function () {
-                setIsLoading(false);
-            }, 2000);
+            setIsLoading(false);
         }
         loadMovies();
-    }, [isLoading]);
+        console.log('user request', userRequest);
+    }, []);
     function handlePressMovie(movie) {
         navigation.navigate('Details', {
             movie: movie
         });
+    }
+    function handleFooterOptionClick(label) {
+        switch (label) {
+            case 'My account':
+                setIsVisible(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+    async function handleLogout() {
+        try {
+            await SecureStore.deleteItemAsync('email');
+            await SecureStore.deleteItemAsync('username');
+            setIsVisible(false);
+            navigation.push('Home');
+        } catch (error) {
+            ToastAndroid.showWithGravity(
+                error.message.toString(),
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+            );
+        }
     }
     return (
         <Screen>
@@ -55,8 +105,29 @@ function BrowsePageScreen({ navigation }) {
                                 showsVerticalScrollIndicator={false}
                             />
                         </View>
+                        <Modal visible={isVisible}>
+                            <View style={styles.modalContainer}>
+                                <UserRow
+                                    email="mykolas@gmail.com"
+                                    iconName="account"
+                                />
+                                <UserRow
+                                    iconName="logout"
+                                    label="Logout"
+                                    onPress={handleLogout}
+                                />
+                                <View>
+                                    <AppButton
+                                        onPress={() => setIsVisible(false)}
+                                        title="close"
+                                    >
+                                        Close
+                                    </AppButton>
+                                </View>
+                            </View>
+                        </Modal>
                     </View>
-                    <Footer />
+                    <Footer onPress={handleFooterOptionClick} />
                 </View>
             )}
         </Screen>
@@ -70,6 +141,12 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1
+    },
+    modalContainer: {
+        width: '100%',
+        padding: 10,
+        backgroundColor: defaultStyles.colors.lightGrey,
+        borderRadius: 10
     },
     moviesContainer: {
         paddingBottom: 50

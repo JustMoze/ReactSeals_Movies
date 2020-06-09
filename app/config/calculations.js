@@ -9,3 +9,8 @@ export function calculateWidth(currentMillis, durationMillis) {
     var width = Math.round((currentMillis / durationMillis) * 100);
     return width;
 }
+
+export function sliceEmail(email) {
+    var index = email.indexOf('@');
+    return email.slice(0, index);
+}

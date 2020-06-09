@@ -20,17 +20,12 @@ function HomeScreen({ navigation }) {
             </View>
             <View style={styles.buttonsContainer}>
                 <AppButton
-                    color={defaultStyles.colors.secondary}
                     onPress={() => navigation.push('Browse')}
                     width="70%"
                 >
                     Browse
                 </AppButton>
-                <AppButton
-                    color={defaultStyles.colors.secondary}
-                    onPress={() => navigation.push('Login')}
-                    width="70%"
-                >
+                <AppButton onPress={() => navigation.push('Login')} width="70%">
                     Login
                 </AppButton>
             </View>
