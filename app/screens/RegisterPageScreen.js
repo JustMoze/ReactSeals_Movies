@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, ToastAndroid } from 'react-native';
 import * as Crypto from 'expo-crypto';
 
 import defaultStyles from '../config/styles';
@@ -38,8 +38,11 @@ function RegisterPageScreen({ navigation }) {
             }
             hashPassword(password);
         } catch (error) {
-            console.log('errror', error);
-            alert(error.message);
+            ToastAndroid.showWithGravity(
+                error.toString(),
+                ToastAndroid.SHORT,
+                ToastAndroid.CENTER
+            );
         }
     };
     return (

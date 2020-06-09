@@ -7,8 +7,8 @@ import defaultStyles from './../config/styles';
 import Header from './../components/Header';
 import HeaderNavigator from './../components/HeaderNavigator';
 import MovieForm from '../components/forms/MovieForm';
-import validationSchema from './../config/validationSchema';
 import Movie_DB from '../services/firebase';
+import validationSchema from './../config/validationSchema';
 import { sliceEmail } from './../config/calculations';
 
 function LoginPageScreen({ navigation }) {

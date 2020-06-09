@@ -3,17 +3,15 @@ import { View, StyleSheet, FlatList, ToastAndroid } from 'react-native';
 import Modal from 'react-native-modal';
 import * as SecureStore from 'expo-secure-store';
 
+import AppButton from './../components/AppButton';
 import BrowserPageComponent from '../components/BrowserPageComponent';
+import defaultStyles from './../config/styles';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import Screen from '../components/Screen';
 import Spinner from '../components/Spinner';
-import { height } from '../config/phoneDetails';
 import UserRow from '../components/UserRow';
-import AppButton from './../components/AppButton';
-import defaultStyles from './../config/styles';
-
-console.ignoredYellowBox = ['Setting a timer'];
+import { height } from '../config/phoneDetails';
 
 const categories = [
     { name: 'Popular', property: 'popular' },
@@ -31,27 +29,26 @@ function BrowsePageScreen({ navigation }) {
         username: ''
     });
     useEffect(() => {
-        async function retrieveData() {
-            try {
-                const email_address = await SecureStore.getItemAsync('email');
-                const username = await SecureStore.getItemAsync('username');
-                if (email_address !== null && username !== null) {
-                    setUserRequest({
-                        email: email_address,
-                        username: username
-                    });
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
         retrieveData();
-        function loadMovies() {
-            setIsLoading(false);
-        }
-        loadMovies();
-        console.log('user request', userRequest);
     }, []);
+
+    async function retrieveData() {
+        try {
+            const [email, username] = await Promise.all([
+                SecureStore.getItemAsync('email'),
+                SecureStore.getItemAsync('username')
+            ]);
+            setUserRequest({
+                email,
+                username
+            });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+            console.log('user request', userRequest);
+        }
+    }
     function handlePressMovie(movie) {
         navigation.navigate('Details', {
             movie: movie
