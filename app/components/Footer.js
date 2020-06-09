@@ -7,7 +7,7 @@ import AppText from './AppText';
 
 const footerOptions = [
     {
-        label: 'My favorites',
+        label: 'Romantic',
         iconName: 'heart',
         iconColor: '#d63447'
     },

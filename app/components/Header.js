@@ -9,7 +9,7 @@ function Header({ title, NavigatorLeft, NavigatorRight }) {
     const configureTitle = () => {
         var slicedTitle = '';
         if (title.length > 9) {
-            slicedTitle = title.slice(0, 9) + '...';
+            slicedTitle = title.slice(0, 7) + '...';
         }
         if (slicedTitle) {
             return slicedTitle;

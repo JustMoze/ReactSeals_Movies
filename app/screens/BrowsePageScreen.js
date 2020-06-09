@@ -23,6 +23,8 @@ const categories = [
 
 function BrowsePageScreen({ navigation }) {
     const [isVisible, setIsVisible] = useState(false);
+    const [isVisibleRomantic, setIsVisibleRomantic] = useState(false);
+    const [isInverted, setIsInverted] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [userRequest, setUserRequest] = useState({
         email: '',
@@ -46,10 +48,10 @@ function BrowsePageScreen({ navigation }) {
             console.log(error);
         } finally {
             setIsLoading(false);
-            console.log('user request', userRequest);
         }
     }
     function handlePressMovie(movie) {
+        setIsVisibleRomantic(false);
         navigation.navigate('Details', {
             movie: movie
         });
@@ -58,6 +60,12 @@ function BrowsePageScreen({ navigation }) {
         switch (label) {
             case 'My account':
                 setIsVisible(true);
+                break;
+            case 'The latest':
+                setIsInverted(!isInverted);
+                break;
+            case 'Romantic':
+                setIsVisibleRomantic(true);
                 break;
 
             default:
@@ -88,6 +96,7 @@ function BrowsePageScreen({ navigation }) {
                         <Header title="Home" style={styles.title} />
                         <View style={styles.categoriesContainer}>
                             <FlatList
+                                inverted={isInverted}
                                 data={categories}
                                 keyExtractor={(item) => item.name.toString()}
                                 renderItem={({ item, index }) => (
@@ -123,6 +132,36 @@ function BrowsePageScreen({ navigation }) {
                                 </View>
                             </View>
                         </Modal>
+                        <Modal
+                            visible={isVisibleRomantic}
+                            style={styles.MoviesModal}
+                        >
+                            <View
+                                style={[
+                                    styles.modalContainer,
+                                    {
+                                        backgroundColor:
+                                            defaultStyles.colors.white
+                                    }
+                                ]}
+                            >
+                                <BrowserPageComponent
+                                    romatic={true}
+                                    onPress={handlePressMovie}
+                                    title="Romatic movies"
+                                />
+                                <View style={styles.closeButton}>
+                                    <AppButton
+                                        onPress={() =>
+                                            setIsVisibleRomantic(false)
+                                        }
+                                        title="close"
+                                    >
+                                        Close
+                                    </AppButton>
+                                </View>
+                            </View>
+                        </Modal>
                     </View>
                     <Footer onPress={handleFooterOptionClick} />
                 </View>
@@ -136,6 +175,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingBottom: height * 0.25
     },
+    closeButton: {
+        width: '80%',
+        alignSelf: 'center'
+    },
     container: {
         flex: 1
     },
@@ -147,6 +190,9 @@ const styles = StyleSheet.create({
     },
     moviesContainer: {
         paddingBottom: 50
+    },
+    MoviesListModal: {
+        height: height / 2.5
     },
     title: {
         fontSize: 25

@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 
 import CategoryTitle from './CategoryTitle';
 import MovieList from './MovieList';
-import { getMovies, similarMovies } from './../services/movieService';
+import {
+    getMovies,
+    similarMovies,
+    romanticMovies
+} from './../services/movieService';
 import { IMAGES_PATH } from 'react-native-dotenv';
 
 function BrowserPageComponent({
     category,
     movieId = null,
     realted = false,
+    romatic = false,
     onPress,
     style,
     title
@@ -17,12 +22,16 @@ function BrowserPageComponent({
     useEffect(() => {
         async function getSpecificMovies() {
             try {
-                if (!realted) {
-                    const { data: movies } = await getMovies(category);
+                if (realted) {
+                    const { data: movies } = await similarMovies(movieId);
+                    const deconstructedMovies = deconstructTheMovies(movies);
+                    setCollectedMovies(deconstructedMovies);
+                } else if (romatic) {
+                    const { data: movies } = await romanticMovies();
                     const deconstructedMovies = deconstructTheMovies(movies);
                     setCollectedMovies(deconstructedMovies);
                 } else {
-                    const { data: movies } = await similarMovies(movieId);
+                    const { data: movies } = await getMovies(category);
                     const deconstructedMovies = deconstructTheMovies(movies);
                     setCollectedMovies(deconstructedMovies);
                 }

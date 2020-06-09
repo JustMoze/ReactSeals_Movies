@@ -12,3 +12,8 @@ export function similarMovies(movieId) {
             `${movieId}/similar?api_key=${API_KEY}&language=en-US&page=1`
     );
 }
+export function romanticMovies() {
+    return http.get(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749`
+    );
+}
