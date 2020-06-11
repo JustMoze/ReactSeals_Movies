@@ -57,9 +57,14 @@ function BrowsePageScreen({ navigation }) {
         });
     }
     function handleFooterOptionClick(label) {
+        const { email } = userRequest;
         switch (label) {
             case 'My account':
-                setIsVisible(true);
+                if (email !== '') {
+                    setIsVisible(true);
+                } else {
+                    navigation.push('Login');
+                }
                 break;
             case 'The latest':
                 setIsInverted(!isInverted);
@@ -86,6 +91,7 @@ function BrowsePageScreen({ navigation }) {
             );
         }
     }
+    const { email, username } = userRequest;
     return (
         <Screen>
             {isLoading ? (
@@ -113,10 +119,7 @@ function BrowsePageScreen({ navigation }) {
                         </View>
                         <Modal visible={isVisible}>
                             <View style={styles.modalContainer}>
-                                <UserRow
-                                    email="mykolas@gmail.com"
-                                    iconName="account"
-                                />
+                                <UserRow email={email} iconName="account" />
                                 <UserRow
                                     iconName="logout"
                                     label="Logout"
@@ -176,17 +179,17 @@ const styles = StyleSheet.create({
         paddingBottom: height * 0.25
     },
     closeButton: {
-        width: '80%',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        width: '80%'
     },
     container: {
         flex: 1
     },
     modalContainer: {
-        width: '100%',
-        padding: 10,
         backgroundColor: defaultStyles.colors.lightGrey,
-        borderRadius: 10
+        borderRadius: 10,
+        padding: 10,
+        width: '100%'
     },
     moviesContainer: {
         paddingBottom: 50
