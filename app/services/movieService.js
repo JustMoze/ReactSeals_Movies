@@ -17,3 +17,11 @@ export function romanticMovies() {
         `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=10749`
     );
 }
+export function getVideos(movieID) {
+    return http.get(
+        MOVIES_API_URL + `${movieID}/videos?api_key=${API_KEY}&language=en-US`
+    );
+}
+export function constructTrailerUrl(key) {
+    return `https://www.youtube.com/watch?v=${key}`;
+}
