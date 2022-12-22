@@ -22,7 +22,7 @@
     "expo-secure-store": "~8.1.0",
     "firebase": "^7.9.0",
     "formik": "^2.1.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^2.2.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
